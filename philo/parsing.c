@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joao-maia <joao-maia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:35 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/05 18:01:54 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/18 11:36:24 by joao-maia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static void	assign(char **argv, t_params *params)
 
 bool	ft_parsing(int argc, char **argv, t_params *params)
 {
-	params = malloc (sizeof(t_params));
-	memset(params, 0, sizeof(t_params));
 	if (argc < 5 || argc > 6)
 		return (0);
 	if (!ft_check_valid(argv[1]))

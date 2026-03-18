@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: joao-maia <joao-maia@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:01:12 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/05 15:24:28 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/18 11:33:53 by joao-maia        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_init(t_params params)
-{
+// void	philo_init(t_params params)
+// {
 	
-}
+// }

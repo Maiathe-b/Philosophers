@@ -1,29 +1,20 @@
-CLIENT = client
-SERVER = server
-SRCS= client.c server.c
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
+NAME := philo
+CC := cc
+CFLAGS := -Wall -Wextra -Werror -g
+SRCS := ft_atoi.c parsing_utils.c parsing.c philo_init.c philo.c
+OBJS := $(SRCS:.c=.o)
 
-CC= cc
-CC_FLAGS= -Wall -Wextra -Werror
+all: $(NAME)
 
-all: $(LIBFT) $(CLIENT) $(SERVER)
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -rf $(OBJS)
 
 fclean: clean
-	rm -f $(CLIENT) $(SERVER)
+	@rm -f $(NAME)
 
 re: fclean all
-
-$(CLIENT):
-	$(CC)  $(CC_FLAGS) client.c -L$(LIBFT_DIR) -lft -o $(CLIENT)
-
-$(SERVER):
-	$(CC)  $(CC_FLAGS) server.c -L$(LIBFT_DIR) -lft -o $(SERVER)
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:40 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/05 15:35:54 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/05 17:52:44 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ typedef	struct s_waiter
 typedef struct s_master
 {
 	t_params	*params;
-}	t_philo;
+}	t_master;
 
 
 int		ft_atoi(const char *nptr);
-bool	parsing(int argc, char **argv, t_params *params);
+bool	ft_parsing(int argc, char **argv, t_params *params);
 
 #endif

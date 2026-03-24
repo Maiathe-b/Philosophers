@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:01:12 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 12:24:36 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:27:36 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ bool	fork_init(t_master *master)
 		if (pthread_mutex_init(&master->mutex->forks[i], NULL))
 		{
 			fork_destroy(master);
+			printf("MUTEX ERROR\n");
 			return (1);
 		}
 		i++;
 	}
-	prinf("MUTEX ERROR\n");
 	return (0);
 }
 
@@ -67,9 +67,11 @@ bool	init_mutex(t_master *master)
 	int	i;
 
 	i = 0;
-	master->mutex = malloc(sizeof(pthread_mutex_t) * master->params->n_philo);
+	master->mutex->forks = malloc(sizeof(pthread_mutex_t) * master->params->n_philo);
 	if (!master->mutex->forks)
+	{
 		return (1);
+	}
 	if (fork_init(master))
 		return (1);
 	if (mutex_util(master))

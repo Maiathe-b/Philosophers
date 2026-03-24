@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:40 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 14:47:26 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:11:14 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define EAT_MSG "is eating"
 # define SLEEP_MSG "is sleeping"
 # define THINK_MSG "is thinking"
+# define DIED_MSG "has died"
 
 # include "unistd.h"
 # include "stdio.h"
@@ -81,5 +82,7 @@ bool	sim_init(t_master *master);
 bool	init_mutex(t_master *master);
 bool	dead_check(t_philo *philo);
 void	philo_write(char *msg, t_philo *philo);
+void	*philo_loop(void *philos);
+void	monitor(t_master *master);
 
 #endif

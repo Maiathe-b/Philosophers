@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:37 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 14:12:42 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:28:00 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	clean_master(t_master **master)
 	free (*master);
 }
 
-void	init_master(t_master *master)
+int	init_master(t_master *master)
 {
 	master->params = malloc(sizeof(t_params));
 	if (!master->params)
@@ -51,6 +51,7 @@ void	init_master(t_master *master)
 		return 0;
 	memset(master->mutex, 0, sizeof(t_mutex));
 	master->philo = NULL;
+	return (1);
 }
 
 void	start_sim(t_master *master)
@@ -60,10 +61,16 @@ void	start_sim(t_master *master)
 	i = 0;
 	while (i < master->params->n_philo)
 	{
-		pthread_create(&master->philo[i].thread, NULL, /*loop function*/, &master->philo[i]);
+		pthread_create(&master->philo[i].thread, NULL, philo_loop, &master->philo[i]);
 		i++;
 	}
-	
+	monitor(master);
+	i = 0;
+	while (i < master->params->n_philo)
+	{
+		pthread_join(master->philo[i].thread, NULL);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -72,7 +79,8 @@ int	main(int argc, char **argv)
 
 	master = malloc(sizeof(t_master));
 	memset(master, 0, sizeof(t_master));
-	init_master(master);
+	if (!init_master(master))
+		return (1);
 	if (!ft_parsing(argc, argv, master->params))
 	{
 		free(master);
@@ -87,5 +95,6 @@ int	main(int argc, char **argv)
 	}
 	if (init_mutex(master) || sim_init(master))
 		return (1);
+	start_sim(master);
 	free (master);
 }

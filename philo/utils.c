@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 16:23:01 by joao-maia         #+#    #+#             */
-/*   Updated: 2026/03/24 14:47:53 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:30:27 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ long	get_current_time(void)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL))
+	if (gettimeofday(&tv, NULL) == -1)
 		return (-1);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	return (tv.tv_sec * 1000L + tv.tv_usec / 1000L);
 }
 
 bool	dead_check(t_philo *philo)
@@ -28,6 +28,7 @@ bool	dead_check(t_philo *philo)
 	pthread_mutex_lock (&philo->mutex->death_mutex);
 	result = philo->params->dead_flag;
 	pthread_mutex_unlock (&philo->mutex->death_mutex);
+	return (result);
 }
 
 void	philo_write(char *msg, t_philo *philo)
@@ -38,7 +39,7 @@ void	philo_write(char *msg, t_philo *philo)
 		return ;
 	pthread_mutex_lock (&philo->mutex->msg_mutex);
 	time = get_current_time() - philo->params->start_time;
-	printf("%ld %d %s", time, philo->id, msg);
+	printf("%li %d %s\n", time, philo->id, msg);
 	pthread_mutex_unlock(&philo->mutex->msg_mutex);
 }
 

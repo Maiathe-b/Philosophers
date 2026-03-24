@@ -1,7 +1,7 @@
 NAME := philo
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -g
-SRCS := ft_atoi.c parsing_utils.c parsing.c philo_init.c philo.c
+SRCS := ft_atoi.c monitor.c mutex_init.c philo_loop.c parsing.c philo_init.c philo.c utils.c
 OBJS := $(SRCS:.c=.o)
 
 all: $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 14:45:46 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:14:13 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ void	*philo_loop(void *philos)
 		sleep_time(philo, 10);
 	while (dead_check(philo))
 	{
-		philo
-	} 
+		philo_eat(philo);
+		if (!dead_check(philo))
+			break ;
+		philo_sleep(philo);
+		if (!dead_check(philo))
+			break ;
+		philo_thinks(philo);
+	}
+	return (NULL);
 }

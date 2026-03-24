@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:35 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 14:47:39 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:05:16 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	assign(char **argv, t_params *params)
 	params->delta_sleep = ft_atoi(argv[4]);
 	if (argv[5])
 		params->_n_meals = ft_atoi(argv[5]);
+	else
+		params->_n_meals = -1;
 	params->dead_flag = 1;
 }
 

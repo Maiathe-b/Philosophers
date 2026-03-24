@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:23:59 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 12:33:06 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:33:24 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ bool	sim_init(t_master *master)
 	master->philo = malloc (sizeof(t_philo) * master->params->n_philo);
 	if (!master->philo)
 		return (1);
-	while (1 < master->params->n_philo)
+	while (i < master->params->n_philo)
 	{
 		philo_init(master, &master->philo[i], i);
 		i++;
 	}
+	master->params->start_time = get_current_time();
 	return (0);
 }

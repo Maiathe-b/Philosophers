@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:14:13 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:01:58 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	philo_eat(t_philo *philo)
 	philo_write (EAT_MSG, philo);
 	philo->last_meal_time = get_current_time();
 	philo->eat_count++;
+	if (philo->eat_count == philo->params->_n_meals)
+		philo->meals_reached = true;
 	pthread_mutex_unlock (&philo->mutex->eat_mutex);
 	sleep_time(philo, philo->params->delta_eat);
 	pthread_mutex_unlock (philo->l_fork);

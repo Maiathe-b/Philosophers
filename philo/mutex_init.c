@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:01:12 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:27:36 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 15:55:50 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	fork_destroy(t_master *master)
+void	fork_destroy(t_master *master, int i)
 {
-	int	i;
-
-	i = 0;
-	while (&master->mutex->forks[i])
+	while (i >= 0)
 	{
 		pthread_mutex_destroy(&master->mutex->forks[i]);
-		i++;
+		i--;
 	}
 }
 
@@ -33,7 +30,7 @@ bool	fork_init(t_master *master)
 	{
 		if (pthread_mutex_init(&master->mutex->forks[i], NULL))
 		{
-			fork_destroy(master);
+			fork_destroy(master, i);
 			printf("MUTEX ERROR\n");
 			return (1);
 		}
@@ -64,9 +61,6 @@ bool	mutex_util(t_master *master)
 
 bool	init_mutex(t_master *master)
 {
-	int	i;
-
-	i = 0;
 	master->mutex->forks = malloc(sizeof(pthread_mutex_t) * master->params->n_philo);
 	if (!master->mutex->forks)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:53:59 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:13:27 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:01:42 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	n_meals_reached(t_master *master)
 	pthread_mutex_lock(&master->mutex->eat_mutex);
 	while (i < master->params->n_philo)
 	{
-		if (master->philo[i].eat_count != master->params->_n_meals)
+		if (master->philo[i].meals_reached == false)
 			break ;
 		i++;
 	}

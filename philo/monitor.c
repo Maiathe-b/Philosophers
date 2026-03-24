@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:53:59 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 16:01:42 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:20:19 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,9 @@ void	monitor(t_master *master)
 		{
 			if (n_meals_reached(master))
 				return ;
-			}
 		}
 		if (philo_death(master))
-		{
 			return ;
-		}
-		usleep(500);
+		usleep(1000);
 	}
+}

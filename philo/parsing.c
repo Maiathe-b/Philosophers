@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:35 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:05:16 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:33:27 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_check_valid(char *arg)
 	int	number;
 
 	number = ft_atoi(arg);
-	if (number < 0 || number / __LONG_MAX__> 1)
+	if (number <= 0 || number / __LONG_MAX__> 1)
 		return (false);
 	return (true);
 }

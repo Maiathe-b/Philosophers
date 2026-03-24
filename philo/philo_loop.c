@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 16:01:58 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 16:35:43 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	get_fork(t_philo *philo)
 {
 	if (philo->id % 2 != 0)
 	{
-		pthread_mutex_lock (philo->r_fork);
-		philo_write(FORK_MSG, philo);
 		pthread_mutex_lock (philo->l_fork);
+		philo_write(FORK_MSG, philo);
+		pthread_mutex_lock (philo->r_fork);
 		philo_write(FORK_MSG, philo);
 		return ;
 	}
-	pthread_mutex_lock (philo->l_fork);
-	philo_write(FORK_MSG, philo);
 	pthread_mutex_lock (philo->r_fork);
+	philo_write(FORK_MSG, philo);
+	pthread_mutex_lock (philo->l_fork);
 	philo_write(FORK_MSG, philo);
 	return ;
 }
@@ -61,7 +61,7 @@ void	*philo_loop(void *philos)
 
 	philo = (t_philo *)philos;
 	if (philo->id % 2 != 0)
-		sleep_time(philo, 10);
+		sleep_time(philo, 100);
 	while (dead_check(philo))
 	{
 		philo_eat(philo);

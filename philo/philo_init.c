@@ -3,16 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joao-maia <joao-maia@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 12:01:12 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/18 11:33:53 by joao-maia        ###   ########.fr       */
+/*   Created: 2026/03/24 12:23:59 by jomaia            #+#    #+#             */
+/*   Updated: 2026/03/24 12:33:06 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "philo.h"
 
-// void	philo_init(t_params params)
-// {
-	
-// }
+void	philo_init(t_master *master, t_philo *philo, int i)
+{
+	philo->params = master->params;
+	philo->mutex = master->mutex;
+	philo->eat_count = 0;
+	philo->last_meal_time = get_current_time();
+	philo->id = i + 1;
+	philo->l_fork = &master->mutex->forks[i];
+	if (i == 0)
+		philo->r_fork = &master->mutex->forks[master->params->n_philo - 1];
+	else
+		philo->r_fork = &master->mutex->forks[i - 1];
+}
+
+bool	sim_init(t_master *master)
+{
+	int	i;
+
+	i = 0;
+	master->philo = malloc (sizeof(t_philo) * master->params->n_philo);
+	if (!master->philo)
+		return (1);
+	while (1 < master->params->n_philo)
+	{
+		philo_init(master, &master->philo[i], i);
+		i++;
+	}
+	return (0);
+}

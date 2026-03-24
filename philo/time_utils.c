@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 16:53:15 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 12:24:43 by jomaia           ###   ########.fr       */
+/*   Created: 2026/03/18 16:23:01 by joao-maia         #+#    #+#             */
+/*   Updated: 2026/03/24 12:37:59 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *nptr)
+long	get_current_time(void)
 {
-	int	num;
-	int	sign;
+	struct timeval	tv;
 
-	num = 0;
-	sign = 1;
-	while (*nptr == ' ' || (*nptr > 8 && *nptr < 14))
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
-	{
-		if (*nptr == '-')
-			sign = -sign;
-		nptr++;
-	}
-	while (*nptr >= '0' && *nptr <= '9')
-	{
-		num = num * 10;
-		num = num + (*nptr - '0');
-		nptr++;
-	}
-	num = num * sign;
-	return (num);
+	if (gettimeofday(&tv, NULL))
+		return (-1);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	sleep_time(long ms)
+{
+	long	start;
+
+	start = get_current_time();
+	while (get_current_time() - start < ms)
+		usleep(500);
 }

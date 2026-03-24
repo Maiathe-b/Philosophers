@@ -6,12 +6,17 @@
 /*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:40 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 12:33:52 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 14:47:26 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+# define FORK_MSG "has taken a fork"
+# define EAT_MSG "is eating"
+# define SLEEP_MSG "is sleeping"
+# define THINK_MSG "is thinking"
 
 # include "unistd.h"
 # include "stdio.h"
@@ -68,11 +73,13 @@ typedef struct s_master
 	t_philo		*philo;
 }	t_master;
 
-void	sleep_time(t_master *master, long ms);
+void	sleep_time(t_philo *philo, long ms);
 long	get_current_time(void);
 int		ft_atoi(const char *nptr);
 bool	ft_parsing(int argc, char **argv, t_params *params);
 bool	sim_init(t_master *master);
 bool	init_mutex(t_master *master);
+bool	dead_check(t_philo *philo);
+void	philo_write(char *msg, t_philo *philo);
 
 #endif

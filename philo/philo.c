@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:37 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 12:34:50 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/24 14:12:42 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ void	init_master(t_master *master)
 		return 0;
 	memset(master->mutex, 0, sizeof(t_mutex));
 	master->philo = NULL;
+}
+
+void	start_sim(t_master *master)
+{
+	int	i;
+	
+	i = 0;
+	while (i < master->params->n_philo)
+	{
+		pthread_create(&master->philo[i].thread, NULL, /*loop function*/, &master->philo[i]);
+		i++;
+	}
+	
 }
 
 int	main(int argc, char **argv)

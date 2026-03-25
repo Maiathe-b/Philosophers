@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:01:12 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:55:50 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 15:33:59 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ bool	mutex_util(t_master *master)
 
 bool	init_mutex(t_master *master)
 {
-	master->mutex->forks = malloc(sizeof(pthread_mutex_t) * master->params->n_philo);
+	master->mutex->forks = malloc(sizeof(pthread_mutex_t) * \
+master->params->n_philo);
 	if (!master->mutex->forks)
 	{
 		return (1);
@@ -70,5 +71,5 @@ bool	init_mutex(t_master *master)
 		return (1);
 	if (mutex_util(master))
 		return (1);
-	return (0);	
+	return (0);
 }

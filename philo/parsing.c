@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:35 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 14:39:23 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 15:35:36 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_check_valid(char *arg)
 		i++;
 	}
 	number = ft_atoi(arg);
-	if (number <= 0 || number / __LONG_MAX__> 1)
+	if (number <= 0 || number / __LONG_MAX__ > 1)
 		return (false);
 	return (true);
 }

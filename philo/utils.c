@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 16:23:01 by joao-maia         #+#    #+#             */
-/*   Updated: 2026/03/25 14:21:43 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 16:23:13 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ long	get_current_time(void)
 
 bool	dead_check(t_philo *philo)
 {
-	bool result;
-	
+	bool	result;
+
 	pthread_mutex_lock (&philo->mutex->death_mutex);
 	result = philo->params->dead_flag;
 	pthread_mutex_unlock (&philo->mutex->death_mutex);
@@ -34,10 +34,13 @@ bool	dead_check(t_philo *philo)
 void	philo_write(char *msg, t_philo *philo)
 {
 	long	time;
-	
-	if (!dead_check(philo))
-		return ;
+
 	pthread_mutex_lock (&philo->mutex->msg_mutex);
+	if (!dead_check(philo))
+	{
+		pthread_mutex_unlock(&philo->mutex->msg_mutex);
+		return ;
+	}
 	time = get_current_time() - philo->params->start_time;
 	printf("%li %d %s\n", time, philo->id, msg);
 	pthread_mutex_unlock(&philo->mutex->msg_mutex);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:40 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 16:00:35 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 15:37:14 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "stdbool.h"
 # include <string.h>
 
-typedef struct	s_mutex
+typedef struct s_mutex
 {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	msg_mutex;
@@ -35,8 +35,7 @@ typedef struct	s_mutex
 	pthread_mutex_t	death_mutex;
 }	t_mutex;
 
-
-typedef struct	s_params
+typedef struct s_params
 {
 	int		n_philo;
 	long	delta_death;
@@ -59,13 +58,6 @@ typedef struct s_philo
 	int				eat_count;
 	bool			meals_reached;
 }	t_philo;
-
-
-typedef	struct s_waiter
-{
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	*philo;
-}	t_waiter;
 
 typedef struct s_master
 {

@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:37 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 14:40:00 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 15:36:32 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int	init_master(t_master *master)
 {
 	master->params = malloc(sizeof(t_params));
 	if (!master->params)
-		return 0;
+		return (0);
 	memset(master->params, 0, sizeof(t_params));
 	master->mutex = malloc(sizeof(t_mutex));
 	if (!master->mutex)
-		return 0;
+		return (0);
 	memset(master->mutex, 0, sizeof(t_mutex));
 	master->philo = NULL;
 	return (1);
@@ -62,11 +62,12 @@ int	init_master(t_master *master)
 void	start_sim(t_master *master)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < master->params->n_philo)
 	{
-		pthread_create(&master->philo[i].thread, NULL, philo_loop, &master->philo[i]);
+		pthread_create(&master->philo[i].thread, NULL, \
+philo_loop, &master->philo[i]);
 		i++;
 	}
 	monitor(master);

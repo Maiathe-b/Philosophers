@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 14:33:47 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 15:37:50 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	philo_eat(t_philo *philo)
 	}
 	else
 		pthread_mutex_unlock (&philo->mutex->eat_mutex);
-
 }
 
 void	philo_sleep(t_philo *philo)

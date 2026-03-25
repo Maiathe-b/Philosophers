@@ -3,19 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:35 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 16:33:27 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 14:39:23 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	ft_isalpha(int c)
+{
+	if ((c >= 'A') && !(c > 'Z' && c < 'a') && (c <= 'z'))
+		return (1);
+	return (0);
+}
+
 static int	ft_check_valid(char *arg)
 {
 	int	number;
+	int	i;
 
+	i = 0;
+	while (arg[i])
+	{
+		if (ft_isalpha(arg[i]))
+			return (false);
+		i++;
+	}
 	number = ft_atoi(arg);
 	if (number <= 0 || number / __LONG_MAX__> 1)
 		return (false);

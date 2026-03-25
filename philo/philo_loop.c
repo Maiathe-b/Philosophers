@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 03:09:36 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 14:33:47 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,23 @@ void	get_fork(t_philo *philo)
 
 void	philo_eat(t_philo *philo)
 {
-	get_fork(philo);
 	pthread_mutex_lock (&philo->mutex->eat_mutex);
-	philo_write (EAT_MSG, philo);
-	philo->last_meal_time = get_current_time();
-	philo->eat_count++;
-	if (philo->eat_count == philo->params->_n_meals)
-		philo->meals_reached = true;
-	pthread_mutex_unlock (&philo->mutex->eat_mutex);
-	sleep_time(philo, philo->params->delta_eat);
-	pthread_mutex_unlock (philo->l_fork);
-	pthread_mutex_unlock (philo->r_fork);
+	if (!philo->meals_reached)
+	{
+		get_fork(philo);
+		philo_write (EAT_MSG, philo);
+		philo->last_meal_time = get_current_time();
+		philo->eat_count++;
+		if (philo->eat_count == philo->params->_n_meals)
+			philo->meals_reached = true;
+		pthread_mutex_unlock (&philo->mutex->eat_mutex);
+		sleep_time(philo, philo->params->delta_eat);
+		pthread_mutex_unlock (philo->l_fork);
+		pthread_mutex_unlock (philo->r_fork);
+	}
+	else
+		pthread_mutex_unlock (&philo->mutex->eat_mutex);
+
 }
 
 void	philo_sleep(t_philo *philo)

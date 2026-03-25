@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 16:23:01 by joao-maia         #+#    #+#             */
-/*   Updated: 2026/03/25 03:07:37 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 14:21:43 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	sleep_time(t_philo *philo, long ms)
 	{
 		if (!dead_check(philo))
 			return ;
-		usleep(100);
+		usleep(500);
 	}
 }

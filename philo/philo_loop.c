@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 15:37:50 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 16:27:08 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	get_fork(t_philo *philo)
 		philo_write(FORK_MSG, philo);
 		return ;
 	}
-	pthread_mutex_lock (philo->r_fork);
-	philo_write(FORK_MSG, philo);
-	pthread_mutex_lock (philo->l_fork);
-	philo_write(FORK_MSG, philo);
+	else
+	{
+		pthread_mutex_lock (philo->r_fork);
+		philo_write(FORK_MSG, philo);
+		pthread_mutex_lock (philo->l_fork);
+		philo_write(FORK_MSG, philo);
+	}
 	return ;
 }
 

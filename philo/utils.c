@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 16:23:01 by joao-maia         #+#    #+#             */
-/*   Updated: 2026/03/24 16:22:23 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 03:07:37 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	sleep_time(t_philo *philo, long ms)
 	{
 		if (!dead_check(philo))
 			return ;
-		usleep(1000);
+		usleep(100);
 	}
 }

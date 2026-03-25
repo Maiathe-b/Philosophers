@@ -3,36 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:37 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:28:00 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 03:19:30 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	clean_master(t_master **master)
+void	destroy_mutex(t_master *master)
 {
 	int	i;
 
 	i = 0;
-	if ((*master)->mutex)
+	if ((master)->mutex)
 	{
-		if ((*master)->mutex->forks)
+		if ((master)->mutex->forks)
 		{
-			while (i < (*master)->params->n_philo)
+			while (i < (master)->params->n_philo)
 			{
-				pthread_mutex_destroy (&(*master)->mutex->forks[i]);
+				pthread_mutex_destroy (&master->mutex->forks[i]);
 				i++;
 			}
 		}
-		pthread_mutex_destroy (&(*master)->mutex->death_mutex);
-		pthread_mutex_destroy (&(*master)->mutex->eat_mutex);
-		pthread_mutex_destroy (&(*master)->mutex->msg_mutex);
-		free ((*master)->mutex->forks);
-		free ((*master)->mutex);
+		pthread_mutex_destroy (&master->mutex->death_mutex);
+		pthread_mutex_destroy (&master->mutex->eat_mutex);
+		pthread_mutex_destroy (&master->mutex->msg_mutex);
+		free (master->mutex->forks);
+		free (master->mutex);
 	}
+}
+
+void	free_master(t_master **master)
+{
+	destroy_mutex(*master);
 	if ((*master)->params)
 		free ((*master)->params);
 	if ((*master)->philo)
@@ -96,5 +101,5 @@ int	main(int argc, char **argv)
 	if (init_mutex(master) || sim_init(master))
 		return (1);
 	start_sim(master);
-	free (master);
+	free_master(&master);
 }

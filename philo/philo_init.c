@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 12:23:59 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/24 15:33:24 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 03:13:06 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	philo_init(t_master *master, t_philo *philo, int i)
 		philo->r_fork = &master->mutex->forks[master->params->n_philo - 1];
 	else
 		philo->r_fork = &master->mutex->forks[i - 1];
+	philo->meals_reached = false;
 }
 
 bool	sim_init(t_master *master)

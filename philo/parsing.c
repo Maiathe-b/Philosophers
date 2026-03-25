@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/03 13:15:35 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 15:35:36 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 17:12:00 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ static void	assign(char **argv, t_params *params)
 bool	ft_parsing(int argc, char **argv, t_params *params)
 {
 	if (argc < 5 || argc > 6)
+	{
+		printf("Invalid number of arguments\n");
 		return (0);
+	}
 	if (!ft_check_valid(argv[1]))
 		return (printf("Invalid number of philosophers\n"), 0);
 	if (!ft_check_valid(argv[2]))

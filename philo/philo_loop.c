@@ -6,7 +6,7 @@
 /*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 16:27:08 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/25 18:21:31 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ void	philo_eat(t_philo *philo)
 		pthread_mutex_unlock (&philo->mutex->eat_mutex);
 }
 
-void	philo_sleep(t_philo *philo)
-{
-	philo_write(SLEEP_MSG, philo);
-	sleep_time(philo, philo->params->delta_sleep);
-}
-
-void	philo_thinks(t_philo *philo)
-{
-	philo_write(THINK_MSG, philo);
-}
-
 void	*philo_loop(void *philos)
 {
 	t_philo	*philo;
@@ -75,10 +64,11 @@ void	*philo_loop(void *philos)
 		philo_eat(philo);
 		if (!dead_check(philo))
 			break ;
-		philo_sleep(philo);
+		philo_write(SLEEP_MSG, philo);
+		sleep_time(philo, philo->params->delta_sleep);
 		if (!dead_check(philo))
 			break ;
-		philo_thinks(philo);
+		philo_write(THINK_MSG, philo);
 	}
 	return (NULL);
 }

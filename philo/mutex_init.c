@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 12:01:12 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 15:33:59 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/26 00:19:45 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,23 @@ bool	fork_init(t_master *master)
 		{
 			fork_destroy(master, i);
 			printf("MUTEX ERROR\n");
-			return (1);
+			return (true);
 		}
 		i++;
 	}
-	return (0);
+	return (false);
 }
 
 bool	mutex_util(t_master *master)
 {
-	if (pthread_mutex_init(&master->mutex->death_mutex, NULL))
+	if (pthread_mutex_init(&master->mutex->death_mutex, NULL) || \
+pthread_mutex_init(&master->mutex->eat_mutex, NULL) || \
+pthread_mutex_init(&master->mutex->msg_mutex, NULL))
 	{
 		printf("MUTEX ERROR\n");
-		return (1);
+		return (true);
 	}
-	if (pthread_mutex_init(&master->mutex->eat_mutex, NULL))
-	{
-		printf("MUTEX ERROR\n");
-		return (1);
-	}
-	if (pthread_mutex_init(&master->mutex->msg_mutex, NULL))
-	{
-		printf("MUTEX ERROR\n");
-		return (1);
-	}
-	return (0);
+	return (false);
 }
 
 bool	init_mutex(t_master *master)
@@ -64,12 +56,10 @@ bool	init_mutex(t_master *master)
 	master->mutex->forks = malloc(sizeof(pthread_mutex_t) * \
 master->params->n_philo);
 	if (!master->mutex->forks)
-	{
-		return (1);
-	}
+		return (true);
 	if (fork_init(master))
-		return (1);
+		return (true);
 	if (mutex_util(master))
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }

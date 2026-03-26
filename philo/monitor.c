@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:53:59 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 16:12:49 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/26 00:23:05 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ bool	n_meals_reached(t_master *master)
 	}
 	if (i == master->params->n_philo)
 	{
-		pthread_mutex_lock(&master->mutex->death_mutex);
 		master->params->dead_flag = 0;
-		pthread_mutex_unlock(&master->mutex->death_mutex);
 		pthread_mutex_unlock(&master->mutex->eat_mutex);
 		return (true);
 	}
@@ -75,12 +73,8 @@ void	monitor(t_master *master)
 {
 	while (1)
 	{
-		if (master->params->_n_meals != -1)
-		{
-			if (n_meals_reached(master))
-				return ;
-		}
-		if (philo_death(master))
+		if ((master->params->_n_meals != -1 && n_meals_reached(master)) || \
+philo_death(master))
 			return ;
 		usleep(500);
 	}

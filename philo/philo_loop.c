@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jomaia <jomaia@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jomaia <jomaia@student.42lisboa.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:13:09 by jomaia            #+#    #+#             */
-/*   Updated: 2026/03/25 18:21:31 by jomaia           ###   ########.fr       */
+/*   Updated: 2026/03/26 00:29:29 by jomaia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	get_fork(t_philo *philo)
 		philo_write(FORK_MSG, philo);
 		pthread_mutex_lock (philo->r_fork);
 		philo_write(FORK_MSG, philo);
-		return ;
 	}
 	else
 	{
@@ -29,7 +28,6 @@ void	get_fork(t_philo *philo)
 		pthread_mutex_lock (philo->l_fork);
 		philo_write(FORK_MSG, philo);
 	}
-	return ;
 }
 
 void	philo_eat(t_philo *philo)
@@ -58,9 +56,11 @@ void	*philo_loop(void *philos)
 
 	philo = (t_philo *)philos;
 	if (philo->id % 2 != 0)
-		sleep_time(philo, 100);
-	while (dead_check(philo))
+		sleep_time(philo, 10);
+	while (1)
 	{
+		if (!dead_check(philo))
+			break ;
 		philo_eat(philo);
 		if (!dead_check(philo))
 			break ;
